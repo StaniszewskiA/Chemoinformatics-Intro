@@ -1,0 +1,120 @@
+\documentclass{beamer}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{float}
+\usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage{diagbox}
+\usepackage{geometry}
+
+\title{Chemoinformatyka - proste deskryptory, filtrowanie}
+\author{Adam Staniszewski}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Chemoinformatyka}
+Chemoinformatyka stosuje metody znane z informatyki do rozwiązywania problemów chemii obliczeniowej. Techniki takie zwyczajowo nazywa się \textbf{in silico}.
+
+\hfill
+
+Największą motywacją dla rozwoju tej dziedziny była (i nadal jest!) możliwość przyspieszenia procesu projektowania leków, na przykład dzięki przewidywaniu właściwości cząsteczek.
+
+\hfill
+
+Szacuje się, że cała możliwa przestrzeń rozwiązań zawiera co najmniej \textbf{$10^{69}$} różnych związków chemicznych.
+\end{frame}
+
+\begin{frame}{Inne obszary zainteresowań chemoinformatyki}
+\begin{itemize}
+    \item Predykcja aktywności chemicznej,
+    \item Bazy danych chemicznych (PubChem, ChEBML, ZINC),
+    \item Modelowanie materiałów,
+    \item Predykcja właściwości fizykochemicznych,
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Reprezentacja związków chemicznych}
+Najpopularniejszym sposobem reprezentowania związków chemicznych w informatyce jest format \textbf{SMILES} - Simplified Molecular Input Line Entry Specification. Jest on na tyle jednoznaczny, że można na jego podstawie bez problemów odtworzyć płaski wzór strukturalny związku chemicznego.
+\end{frame}
+
+\begin{frame}{Format SMILES}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.4\linewidth]{SMILES.png}
+    \caption{Tworzenie SMILESa na podstawie struktury. }
+    \label{fig:enter-label}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Format SMILES}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l|r|l|}
+\hline
+\rowcolor{orange!40} 
+Związek & Wzór sumaryczny & SMILES\\\hline
+Metan & $CH_4$ & C \\\hline
+Kwas octowy & $CH_3COOH$ & CC(=O)O \\\hline
+Tlenek węgla & $[C]=O$ & CO \\\hline
+
+\end{tabular}
+\caption{\label{tab:widgets}Przykłady SMILESów.}
+\end{table}
+
+Na podstawie SMILESów możemy tworzyć \textbf{SMARTSy} (SMILES arbitrary target specification), których działanie można porównać do regexów.
+
+Przykład: 
+
+\[
+[\text{\$}([OH])C=O),\text{\$}(O=C[OH])]
+\]
+
+taki SMARTS będzie dopasowywał się do kwasów karboksylowych.
+
+\end{frame}
+
+\begin{frame}{InChI}
+Zdarza się, że jeden związek da się zapisać za pomocą kilku SMILESów, na przykład:
+\begin{itemize}
+    \item CCO 
+    \item OCC
+    \item C(O)C
+\end{itemize}
+są zupełnie poprawnymi SMILESami etanolu. Można zatem zastosować bardziej rygorystyczny system - \textbf{InChI} (International Chemical Indentifier), który jeszcze mocniej skupia się na strukturze. Na przykład, InChI dla metanu będzie miał postać InChI=1S/CH4/h1H4.
+
+\end{frame}
+
+\begin{frame}{Grafy}
+Wzory strukturalne można interpretować jako grafy. Wtedy do ich badania będziemy mogli zaprzęgnąć wszelkie techniki znane z teorii grafów. 
+\end{frame}
+
+\begin{frame}{Deskryptory molekularne}
+Dwuwymiarowa struktura nie jest wystarczająca do oddania właściwości związku.
+\end{frame}
+
+\begin{frame}{Deskryptory molekularne}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{a-Three-categories-of-molecular-descriptors-1D-one-dimensional-2D-and-3D.png}
+    \caption{Deskryptory molekularne\cite{descriptors_image}}
+    \label{fig:enter-label}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Deskryptory molekularne}
+Mając do dypozycji deskryptory, możemy zacząć tworzyć filtry molekularne, służące na przykład do odrzucania ze zbioru danych cząsteczek o niepożądanych właściwościach.
+\end{frame}
+
+\bibliographystyle{vancouver}
+\bibliography{sample}
+
+\end{document}
